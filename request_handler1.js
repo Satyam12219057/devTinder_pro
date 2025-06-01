@@ -45,9 +45,18 @@ app.get("/user",(req,res,next)=>{
   next();
 });
 app.get("/user",(req,res,next)=>{
-  console.log("handling the route!!");
+  console.log("handlin the route!!");
   next();
 });
+app.post("/user",(req,res)=>{
+  res.send("post request handler");
+
+})
+
+app.use("/user",(req,res)=>{
+  res.send("this is the final response");
+
+})
 
 //now i am going to ready my request handler to listen the request
 app.listen(7777,()=>{
