@@ -37,6 +37,9 @@ app.listen(7777,()=>{
 
 
 //if we have to write the request handler in this way
+
+//the job of the express is taking the request and sending the response
+/*
 const express=require("express");
 const app=express();
 app.get("/user",(req,res,next)=>{
@@ -62,3 +65,32 @@ app.use("/user",(req,res)=>{
 app.listen(7777,()=>{
   console.log("my server is ready to response");
 })
+  */
+ const express=require("express")
+ const app=express();
+ //handle auth middelware for all the request GET,POST
+
+
+ //this is the auth function which handle the auth 
+ //this will call for all the request and validate it
+app.use("/admin",(req,res,next)=>{
+     console.log("admin auth is getting check");
+  const token="xyz";
+   const isAdminAuthorized=token==="xyz";
+   if(!isAdminAuthorized){
+    res.status(401).send("unauthorized request");
+   }else{
+    next();
+   }
+});
+ app.get("/admin/getAllData",(req,res)=>{
+  res.send("get all the data");
+ });
+
+ app.get("/admin/deleteUser",(req,res)=>{
+  res.send("delete all the data")
+ });
+
+ app.listen(7777,()=>{
+  console.log("server is successfully listening on the port");
+ });
